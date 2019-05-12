@@ -8,4 +8,9 @@ class Api::V1::SessionsController < Api::ApplicationController
             render  json: {status: 404}, status: 404
         end
     end
+
+    def destroy
+        session[:user_id] = nil
+        render json: {status: 200}, status: 200
+    end
 end
