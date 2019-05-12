@@ -77,11 +77,9 @@ ActiveRecord::Schema.define(version: 2019_05_12_060615) do
     t.integer "day"
     t.string "time"
     t.bigint "food_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_id"], name: "index_schedules_on_food_id"
-    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,5 +103,4 @@ ActiveRecord::Schema.define(version: 2019_05_12_060615) do
   add_foreign_key "orders", "users"
   add_foreign_key "payment_methods", "users"
   add_foreign_key "schedules", "foods"
-  add_foreign_key "schedules", "users"
 end

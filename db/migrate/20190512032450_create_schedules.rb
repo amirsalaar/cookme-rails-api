@@ -4,7 +4,6 @@ class CreateSchedules < ActiveRecord::Migration[5.2]
       t.integer :day
       t.string :time
       t.references :food, foreign_key: true
-      t.references :user, foreign_key: true
 
       t.timestamps
     end

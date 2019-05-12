@@ -7,7 +7,7 @@ class Food < ApplicationRecord
 
     private
     def is_cook
-        errors.add(:food, "User must be a verified cook.") unless cook && cook.verified?
+        errors.add(:food, "User must be a verified cook.") unless cook&.verified?
     end
     
 end
