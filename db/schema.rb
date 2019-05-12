@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_024716) do
+ActiveRecord::Schema.define(version: 2019_05_12_060615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -37,6 +37,25 @@ ActiveRecord::Schema.define(version: 2019_05_12_024716) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_foods_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "food_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_order_items_on_food_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "transaction_id"
     t.bigint "user_id"
@@ -54,6 +73,17 @@ ActiveRecord::Schema.define(version: 2019_05_12_024716) do
     t.index ["user_id"], name: "index_payment_methods_on_user_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.integer "day"
+    t.string "time"
+    t.bigint "food_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_schedules_on_food_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -69,6 +99,11 @@ ActiveRecord::Schema.define(version: 2019_05_12_024716) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "foods", "users"
+  add_foreign_key "order_items", "foods"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "payment_methods", "users"
+  add_foreign_key "schedules", "foods"
+  add_foreign_key "schedules", "users"
 end
