@@ -1,11 +1,13 @@
 class Api::V1::UsersController < Api::ApplicationController
     def create
         user = User.new user_params
-        byebug
         if user.save
-            render json: {status: 201},status: 201
+            session[:user_id] = user.id
+            render json: {id: user.id}
         else
-            render json: {status: 400},status: 400
+            render(
+                json: { errors: user.errors.messages }, status: 422
+            )
         end
     end
 
