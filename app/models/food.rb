@@ -3,7 +3,7 @@ class Food < ApplicationRecord
     has_many :schedule, dependent: :destroy
     belongs_to :cook,  class_name: "User", foreign_key: "user_id"
 
-    validate :is_cook
+    validate :schedule, presence: true
 
     private
     def is_cook

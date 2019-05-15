@@ -74,8 +74,9 @@ ActiveRecord::Schema.define(version: 2019_05_12_060615) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.integer "day"
-    t.string "time"
+    t.time "date"
+    t.integer "weekday"
+    t.integer "quantity"
     t.bigint "food_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
