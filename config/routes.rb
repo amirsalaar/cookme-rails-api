@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         end
       end
       resource :session, only: [:create, :destroy]
+      resource :foods, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
