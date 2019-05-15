@@ -4,7 +4,8 @@ class User < ApplicationRecord
     has_one :payment_method, dependent: :destroy
     has_many :orders, dependent: :nullify
     has_many :foods, dependent: :destroy
-
+    has_one_attached :avatar
+    
     validates :first_name, :last_name, presence: true
     validates :email, presence: true, uniqueness: true, format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     
