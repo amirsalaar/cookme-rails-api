@@ -22,3 +22,45 @@ admin = User.create(
   verified: true,
   role: 1
 )
+
+10.times do 
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.unique.email,
+    address: {
+      street_address: Faker::Address.street_address,
+      city: Faker::Address.city,
+      province: Faker::Address.state_abbr,
+      postal_code: Faker::Address.zip_code
+    },
+    phone_number: Faker::PhoneNumber.cell_phone,
+    password: PASSWORD,
+    role: 2
+  )
+end
+
+customers = User.order(created_at: :desc).limit(10).offset(0)
+
+5.times do 
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.unique.email,
+    address: {
+      street_address: Faker::Address.street_address,
+      city: Faker::Address.city,
+      province: Faker::Address.state_abbr,
+      postal_code: Faker::Address.zip_code
+    },
+    phone_number: Faker::PhoneNumber.cell_phone,
+    password: PASSWORD,
+    verified: true,
+    role: 1
+  )
+end
+
+cooks = User.order(created_at: :desc).limit(5).offset(0)
+
+puts "#{customers.count} customer created!"
+puts "#{cooks.count} cooks created!"
