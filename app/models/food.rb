@@ -1,11 +1,15 @@
 class Food < ApplicationRecord
+    belongs_to :cook,  class_name: "User", foresign_key: "user_id"
     has_many :order_items, dependent: :nullify
-    belongs_to :cook,  class_name: "User", foreign_key: "user_id"
+    has_many :orders, through: :order_items
     has_many :schedules, dependent: :destroy
 
-    validates :name, uniqueness: { scope: [:user_id], message: "must be unique for a cook" }, on: :create
+    validates :name, uniqueness: { scope: [:user_id], case_sensitive: false, message: "must be unique for a cook" }, on: :create
+    validates :description, presence: true
     validate :set_default_price
     validate :is_cook
+
+    scope(:search, ->(query) { where("title ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%") })
 
     private
     def is_cook

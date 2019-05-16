@@ -22,6 +22,10 @@ class Ability
       can :crud, Food do |food|
         user.persisted? && food.cook == user
       end
+
+      can :order Food do |food|
+        user.persisted? && food.cook !== user
+      end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
