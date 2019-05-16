@@ -2,7 +2,8 @@ class Api::ApplicationController < ApplicationController
     skip_before_action :verify_authenticity_token
     
     rescue_from(ActiveRecord::RecordInvalid, with: :record_invalid)
-
+    rescue_from(ActiveRecord::RecordNotFound, with: :record_not_found)
+    
     private
     def current_user
         if session[:user_id]
@@ -36,6 +37,10 @@ class Api::ApplicationController < ApplicationController
             json: { status: 422, errors: errors},
             status: 422
         )
+    end
+
+    def record_not_found(exception)
+        render json: { error: exception.message }, status: :not_found
     end
     
 end
