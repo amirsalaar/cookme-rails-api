@@ -11,6 +11,9 @@ Schedule.destroy_all
 Food.destroy_all
 
 PASSWORD = 'supersecret'
+NUM_OF_FOODS = 20
+NUM_OF_COOKS = 5
+NUM_OF_CUSTOMERS = 10
 
 admin = User.create(
   first_name: "Jon",
@@ -23,7 +26,7 @@ admin = User.create(
   role: 1
 )
 
-10.times do 
+NUM_OF_CUSTOMERS.times do 
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -42,7 +45,7 @@ end
 
 customers = User.order(created_at: :desc).limit(10).offset(0)
 
-5.times do 
+NUM_OF_COOKS.times do 
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -62,5 +65,17 @@ end
 
 cooks = User.order(created_at: :desc).limit(5).offset(0)
 
+NUM_OF_FOODS.times do 
+  f = Food.create(
+    name: Faker::Food.unique.dish,
+    description: Faker::Food.description,
+    price: rand(6..10) + rand,
+    cook: cooks.sample
+  )
+  f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
+end
+
 puts "#{customers.count} customer created!"
 puts "#{cooks.count} cooks created!"
+puts "#{Food.all.count} foods created!"
+puts "#{Schedule.all.count} schedules created!" 
