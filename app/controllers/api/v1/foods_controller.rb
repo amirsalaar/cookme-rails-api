@@ -1,6 +1,7 @@
 class Api::V1::FoodsController < Api::ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
-    before_action :find_food, only: [:show]
+    before_action :find_food, only: [:show, :destroy]
+    before_action :authorize_user!, only: [:destroy]
 
     def show
         render json: @food
@@ -8,7 +9,9 @@ class Api::V1::FoodsController < Api::ApplicationController
 
     def create
         food = Food.new food_params
-        food.cook = current_user
+        if can?(:cook, food)
+            food.cook = current_user
+        end
         food.save!
         schedules_arr = schedule_params[:schedules]
         (schedules_arr.map {|sc| Schedule.new(weekday: sc[:weekday], quantity: sc[:quantity], food: food)}).map {|s| s.save! }
@@ -17,7 +20,7 @@ class Api::V1::FoodsController < Api::ApplicationController
     end
 
     def destroy
-        food.destroy
+       @food.destroy
         render json: { status: 201 }, status: 201
     end
 
@@ -41,4 +44,7 @@ class Api::V1::FoodsController < Api::ApplicationController
         })
     end
     
+    def authorize_user!
+        render json: {status: 401}, status: 401 unless can?(:crud, @food)
+    end
 end

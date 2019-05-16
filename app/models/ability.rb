@@ -15,8 +15,12 @@ class Ability
 
       alias_action :create, :read, :update, :destroy, to: :crud
 
-      can :crud, Food do |food|
+      can :cook, Food do |food|
         user.persisted? && user.role == 1 && user.verified?
+      end
+
+      can :crud, Food do |food|
+        user.persisted? && food.cook == user
       end
     #
     # The first argument to `can` is the action you are giving the user
