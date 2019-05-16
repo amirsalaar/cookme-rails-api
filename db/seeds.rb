@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Schedule.destroy_all
+Food.destroy_all
 
 PASSWORD = 'supersecret'
 
@@ -17,4 +19,6 @@ admin = User.create(
   address: {city: "Winterfell"},
   phone_number: "778-778-7777",
   password: PASSWORD,
+  verified: true,
+  role: 1
 )

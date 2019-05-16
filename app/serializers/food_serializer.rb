@@ -7,4 +7,8 @@ class FoodSerializer < ActiveModel::Serializer
   )
   belongs_to :cook
   has_many :schedules
+
+  class ScheduleSerializer < ActiveModel::Serializer
+    attributes :id, :weekday, :quantity
+  end
 end

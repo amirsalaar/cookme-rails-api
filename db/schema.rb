@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_060615) do
+ActiveRecord::Schema.define(version: 2019_05_16_042917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_060615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.index ["name", "user_id"], name: "index_foods_on_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
 
@@ -74,12 +75,12 @@ ActiveRecord::Schema.define(version: 2019_05_12_060615) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.time "date"
     t.integer "weekday"
     t.integer "quantity"
     t.bigint "food_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["food_id", "quantity", "weekday"], name: "index_schedules_on_food_id_and_quantity_and_weekday", unique: true
     t.index ["food_id"], name: "index_schedules_on_food_id"
   end
 
