@@ -1,5 +1,5 @@
 class Food < ApplicationRecord
-    belongs_to :cook,  class_name: "User", foresign_key: "user_id"
+    belongs_to :cook,  class_name: "User", foreign_key: "user_id"
     has_many :order_items, dependent: :nullify
     has_many :orders, through: :order_items
     has_many :schedules, dependent: :destroy
