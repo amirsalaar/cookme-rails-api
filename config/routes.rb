@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :foods, except: [:new, :edit]
       resources :users, only: [:create, :update] do
-        member do
+        collection do
           patch :update_password
         end
+        resources :orders, only: [:index, :show, :create]
       end
       resource :session, only: [:create, :destroy]
     end
