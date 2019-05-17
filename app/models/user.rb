@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_one :payment_method, dependent: :destroy
-    has_many :orders, dependent: :nullify
+    has_many :orders, dependent: :destroy
     has_many :foods, dependent: :destroy
     has_one_attached :avatar
     
