@@ -7,13 +7,14 @@ class Api::V1::OrdersController < Api::ApplicationController
     
     def show
         order = current_user.orders.find(params[:id])
-        render json: {id: order.id)}
+        render json: { id: order.id }
     end
     
     def create
         order = Order.new order_params
         order.user = current_user
         order.save!
+        # OrderMailer.send_confirmation(order).deliver
         render json: {status: 200, id: order.id}, status: 200
     end
     
