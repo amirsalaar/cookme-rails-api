@@ -23,12 +23,12 @@ class Ability
         user.persisted? && food.cook == user
       end
 
-      can :order Food do |food|
-        user.persisted? && food.cook !== user
+      can :order, Food do |food|
+        user.persisted? && food.cook != user
       end
 
       can :place, Order do |order|
-        user.persisted? && order.foods.map {|food| food.cook !== user}
+        user.persisted? && order.foods.map {|food| food.cook != user}
       end
     #
     # The first argument to `can` is the action you are giving the user

@@ -7,20 +7,27 @@ class Api::V1::OrdersController < Api::ApplicationController
     
     def show
         order = current_user.orders.find(params[:id])
-        render json: { id: order.id }
+        render json: order
     end
     
     def create
-        order = Order.new order_params
+        order = Order.new
         order.user = current_user
         order.save!
-        # OrderMailer.send_confirmation(order).deliver
-        render json: {status: 200, id: order.id}, status: 200
+        order.place_order(order_params[:order_details])
+        order.reload.set_total!
+        order.save!        
+        render json: {status: 200, order: order}, status: 200
     end
     
     private
     def order_params
-        params.require(:order).permit(food_ids: [])
+        params.require(:order).permit(
+                order_details: [
+                        :food_id,
+                        :order_quantity
+                ]
+        )
     end   
 
     def authorize_user!

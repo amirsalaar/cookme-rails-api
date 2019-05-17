@@ -7,9 +7,13 @@ class Order < ApplicationRecord
   
   before_validation :set_total!
   
-  private
+  def place_order(order_details)
+    order_details.map do |order_detail|
+      self.order_items.create(order_id: self.id, food_id: order_detail[:food_id], quantity: order_detail[:order_quantity]).save!
+    end
+  end
+  
   def set_total!
     self.total = foods.map(&:price).sum
   end
-
 end
