@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
       resources :foods, except: [:new, :edit]
-      resources :users, only: [:create, :update] do
+      resources :users, shallow: true, only: [:create, :update] do
         collection do
           patch :update_password
         end
         resources :orders, only: [:index, :show, :create]
+        resource :cart, only: [:show]
       end
-      resource :session, only: [:create, :destroy]
+      resource :session, only: [:create, :destroy] do
+        post :add_to_cart
+      end
     end
   end
 end

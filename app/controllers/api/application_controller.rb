@@ -5,6 +5,13 @@ class Api::ApplicationController < ApplicationController
     rescue_from(ActiveRecord::RecordNotFound, with: :record_not_found)
     
     private
+    def current_order
+        if not session[:current_order].empty?
+            current_order = session[:current_order]
+        end
+    end
+    helper_method :current_order
+
     def current_user
         if session[:user_id]
             @current_user ||= User.find_by_id(session[:user_id])
