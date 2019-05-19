@@ -1,7 +1,7 @@
 class Api::V1::FoodsController < Api::ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :find_food, only: [:show, :update, :destroy]
-    before_action :authorize_user!, only: [:destroy]
+    before_action :authorize_user!, only: [:destroy, :update]
 
     def show
         render json: @food
