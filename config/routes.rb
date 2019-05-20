@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :foods, except: [:new, :edit]
       resources :users, shallow: true, only: [:create, :update] do
         collection do
-          patch :update_password,
+          patch :update_password
           get :current
         end
         resources :orders, only: [:index, :show, :create]
