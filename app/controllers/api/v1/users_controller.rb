@@ -2,6 +2,10 @@ class Api::V1::UsersController < Api::ApplicationController
     before_action :authenticate_user!, only: [:update, :update_password]
     before_action :find_user, only: [:update, :update_password]
     
+    def current
+        render json: current_user
+    end
+    
     def create
         user = User.new user_params
         user.save!
