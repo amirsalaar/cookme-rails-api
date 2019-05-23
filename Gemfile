@@ -36,7 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pry-rails'
 gem 'faker'
 gem 'cancancan'
-# gem 'delayed_job_active_record'
+gem 'delayed_job_active_record'
 # gem 'delayed_job_web'
 gem 'active_model_serializers'
 gem 'rack-cors'

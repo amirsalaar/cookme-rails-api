@@ -33,7 +33,8 @@ module CookMe
       g.assets = false
       g.helper = false
     end
-
+    config.active_job.queue_adapter = :delayed_job
+    
     config.middleware.insert_before(0, Rack::Cors) do
       allow do
         origins("localhost:3030")
