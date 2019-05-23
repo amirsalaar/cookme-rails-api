@@ -20,10 +20,12 @@ class Api::V1::FoodsController < Api::ApplicationController
 
     def update
         @food.update! food_params
-        @food.schedules.clear
-        if not schedule_params.empty?
-            set_schedule(schedule_params, @food)
-            @food.reload
+        if schedule_params
+            @food.schedules.clear
+            if not schedule_params&.empty?
+                set_schedule(schedule_params, @food)
+                @food.reload
+            end
         end
         render json: { id: @food.id, schedules: @food.schedule_ids }, status: 200
     end
@@ -39,7 +41,7 @@ class Api::V1::FoodsController < Api::ApplicationController
     end
 
     def food_params
-        params.require(:food).permit(:name, :description, :price)
+        params.require(:food).permit(:name, :description, :price, pictures: [])
     end
 
     def schedule_params
