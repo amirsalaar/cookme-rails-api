@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::ApplicationController
     before_action :authenticate_user!, only: [:update, :update_password]
     before_action :find_user, only: [:update, :update_password]
+    before_action :authorize_user!, only: [:update]
     
     def current
         render json: current_user
@@ -50,4 +51,11 @@ class Api::V1::UsersController < Api::ApplicationController
             render json: {errors: @user.errors.messages}, status: 422
         end      
     end
+
+    def authorize_user!
+        unless can?(:crud, @user)
+            render json: { status: 401 }, status: 401
+        end
+    end
+    
 end

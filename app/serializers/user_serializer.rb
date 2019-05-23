@@ -1,4 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   attributes(
     :id,
     :first_name,
@@ -7,6 +9,20 @@ class UserSerializer < ActiveModel::Serializer
     :role,
     :verified,
     :created_at,
-    :updated_at
+    :updated_at,
+    :avatar
   )
+
+  has_many :orders
+
+  def avatar
+    attachment = object.avatar_attachment
+    {
+      id: attachment.id,
+      name: attachment.name,
+      content_type: attachment.blob.content_type,
+      filename: attachment.blob.filename.to_s,
+      url: rails_blob_url(attachment)
+    }
+  end
 end

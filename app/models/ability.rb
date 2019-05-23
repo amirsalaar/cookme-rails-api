@@ -30,6 +30,10 @@ class Ability
       can :place, Order do |order|
         user.persisted? && order.foods.map {|food| food.cook != user}
       end
+
+      can :crud, User do |user_instance|
+        user == user_instance
+      end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
