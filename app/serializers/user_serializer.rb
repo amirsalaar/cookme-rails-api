@@ -17,12 +17,16 @@ class UserSerializer < ActiveModel::Serializer
 
   def avatar
     attachment = object.avatar_attachment
-    {
-      id: attachment.id,
-      name: attachment.name,
-      content_type: attachment.blob.content_type,
-      filename: attachment.blob.filename.to_s,
-      url: rails_blob_url(attachment)
-    }
+    if attachment.present?
+      {
+        id: attachment.id,
+        name: attachment.name,
+        content_type: attachment.blob.content_type,
+        filename: attachment.blob.filename.to_s,
+        url: rails_blob_url(attachment)
+      }
+    else
+      attachment = nil
+    end
   end
 end
