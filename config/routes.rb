@@ -8,7 +8,9 @@ Rails.application.routes.draw do
           patch :update_password
           get :current
         end
-        resources :orders, only: [:index, :show, :create]
+        resources :orders, only: [:index, :show, :create] do
+          resources :payments, only: [:create]
+        end
         resource :cart, only: [:show]
       end
       resource :session, only: [:create, :destroy] do
