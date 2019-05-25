@@ -1,4 +1,4 @@
-class PaymentsController < ApplicationController
+class Api::V1::PaymentsController < Api::ApplicationController
   def create
     order = Order.find params[:order_id]
     charge = Stripe::Charge.create(
