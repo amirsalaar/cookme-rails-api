@@ -5,6 +5,7 @@ class FoodCollectionSerializer < ActiveModel::Serializer
     :id,
     :name,
     :description,
+    :price,
     :pictures
     )
 
