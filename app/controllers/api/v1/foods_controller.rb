@@ -11,7 +11,7 @@ class Api::V1::FoodsController < Api::ApplicationController
         foods = Food.order(created_at: :desc)
         render(
             json: foods,
-            each_serializer: QuestionCollectionSerializer
+            each_serializer: FoodCollectionSerializer
         )
     end
 
