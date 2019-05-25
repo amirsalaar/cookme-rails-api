@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
-      resources :foods, except: [:new, :edit]
+      resources :foods, except: [:new, :edit] do
+        resource :schedule, only: [:create, :destroy]
+      end
       resources :users, shallow: true, only: [:create, :update] do
         collection do
           patch :update_password

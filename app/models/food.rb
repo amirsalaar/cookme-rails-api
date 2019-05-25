@@ -5,7 +5,7 @@ class Food < ApplicationRecord
     has_many :schedules, dependent: :destroy
     has_many_attached :pictures
 
-    validates :name, uniqueness: { scope: [:user_id], case_sensitive: false, message: "must be unique for a cook" }, on: :create
+    validates :name, presence: true, uniqueness: { scope: [:user_id], case_sensitive: false, message: "must be unique for a cook" }, on: :create
     validates :description, presence: true
     validate :set_default_price
     validate :is_cook
