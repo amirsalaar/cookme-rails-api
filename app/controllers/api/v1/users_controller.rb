@@ -8,6 +8,8 @@ class Api::V1::UsersController < Api::ApplicationController
     end
     
     def create
+        binding.pry
+        
         user = User.new user_params
         user.save!
         session[:user_id] = user.id
@@ -35,7 +37,20 @@ class Api::V1::UsersController < Api::ApplicationController
     
     private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation, :email, :phone_number, :role, :avatar, address: [:street_address, :city, :province, :postal_code])
+        # params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation, :email, :phone_number, :role, :avatar, address: [:street_address, :city, :province, :postal_code])
+        {
+            first_name: params[:first_name],
+            last_name: params[:last_name],
+            email: params[:email],
+            password: params[:password],
+            password_confirmation: params[:password_confirmation],
+            phone_number: params[:phone_number],
+            address: params[:address],
+            role: params[:role].to_i,
+            avatar: params[:avatar],
+            certificate: params[:certificate]
+        }
+
     end
 
     def find_user

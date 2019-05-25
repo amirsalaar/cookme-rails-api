@@ -5,6 +5,7 @@ class User < ApplicationRecord
     has_many :orders, dependent: :destroy
     has_many :foods, dependent: :destroy
     has_one_attached :avatar
+    has_one_attached :certificate
     
     validates :first_name, :last_name, presence: true
     validates :email, presence: true, uniqueness: true, format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
