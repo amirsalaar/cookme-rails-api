@@ -9,16 +9,27 @@ class Food < ApplicationRecord
     validates :description, presence: true
     validate :set_default_price
     validate :is_cook
+    before_validation :titleize_name
+    before_validation :sentence_case
 
     scope(:search, ->(query) { where("title ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%") })
 
+    
     private
     def is_cook
         errors.add(:user, "User must be a verified cook.") unless cook&.verified?
     end
-
+    
     def set_default_price
         self.price ||= 0
     end
     
+    def titleize_name
+        self.name = self.name&.titleize
+    end
+
+    def sentence_case
+        self.description = (self.description.split('.').map {|sentence| sentence.strip.capitalize }).join('. ')
+        self.description.concat('.')
+    end
 end
