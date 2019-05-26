@@ -6,7 +6,8 @@ class FoodSerializer < ActiveModel::Serializer
     :name,
     :description,
     :price,
-    :pictures
+    :pictures,
+    :ratings
   )
 
   belongs_to :cook
