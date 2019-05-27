@@ -4,7 +4,7 @@ class Api::V1::UsersController < Api::ApplicationController
     before_action :authorize_user!, only: [:update]
     
     def current
-        render json: current_user
+        render json: {user: current_user, cart: current_order}
     end
     
     def create    

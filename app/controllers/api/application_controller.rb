@@ -6,7 +6,7 @@ class Api::ApplicationController < ApplicationController
     
     private
     def current_order
-        if not session[:current_order].empty?
+        if session[:current_order]
             current_order = session[:current_order]
         end
     end
