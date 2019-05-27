@@ -13,7 +13,7 @@ class Api::V1::SessionsController < Api::ApplicationController
     def add_to_cart
         # {order_details: {food_id: params[:food_id],order_quantity: params[:order_quantity]}}
         session[:current_order] << (params[:order_details])
-        render json: {order_details: session[:current_order]}
+        render json: current_order
     end
 
     def destroy
