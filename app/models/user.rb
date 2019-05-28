@@ -12,6 +12,9 @@ class User < ApplicationRecord
     
     before_validation :titleize_name
 
+    geocoded_by :join_address
+    after_validation :geocode
+
     private
     def titleize_name
         self.first_name = self.first_name&.titleize
@@ -21,4 +24,9 @@ class User < ApplicationRecord
     def full_name
         self.first_name.strip.concat(' ', self.last_name.strip).titleize
     end
+    
+    def join_address
+        address = self.address["street_address"] + ', ' + self.address["city"]  + ', ' +  self.address["province"]  + ' ' +  self.address["postal_code"]  + ', ' +  self.address["country"]
+    end
+    
 end
