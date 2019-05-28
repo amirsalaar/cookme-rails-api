@@ -37,8 +37,18 @@ admin = User.create(
   verified: true,
   role: 1
 )
-admin.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
+admin.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/js.png"), filename: "js.png")
 
+customer = User.create(
+  first_name: "Daenerys ",
+  last_name: "Targaryen",
+  email: "dt@winterfell.gov",
+  address: {street_address:"1844 W 7th Ave", city: "Vancouver", province:"BC", country: "Canada", postal_code: "V6J 1S8"},
+  phone_number: "778-778-7777",
+  password: PASSWORD,
+  role: 2
+)
+customer.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/dt.jpg"), filename: "dt.jpg")
 
 NUM_OF_CUSTOMERS.times do 
   address = VANCOUVER_ADDRESSES.sample
