@@ -12,14 +12,26 @@ Food.destroy_all
 
 PASSWORD = 'supersecret'
 NUM_OF_FOODS = 20
-NUM_OF_COOKS = 5
-NUM_OF_CUSTOMERS = 10
+NUM_OF_COOKS = 10
+NUM_OF_CUSTOMERS = 5
+VANCOUVER_ADDRESSES = [
+  {street_address: "674 Granville St", postal_code: "V6C 1Z6"},
+  {street_address: "300 Cambie St", postal_code: "V6B 2N3"},
+  {street_address: "1032 Alberni St", postal_code: "V6E 1A3"},
+  {street_address: "780 Richards St", postal_code: "V6B 3A4"},
+  {street_address: "568 Beatty St", postal_code: "V6B 2L3"},
+  {street_address: "1103 Davie St", postal_code: "V6E 1N2"},
+  {street_address: "1518 Robson St", postal_code: "V6G 1C3"},
+  {street_address: "556 Beatty St", postal_code: "V6B 2L3"},
+  {street_address: "1283 Hamilton St", postal_code: "V6B 6K3"},
+  {street_address: "888 Nelson St", postal_code: "V6Z 2H1"}
+]
 
 admin = User.create(
   first_name: "Jon",
   last_name: "Snow",
   email: "js@winterfell.gov",
-  address: {city: "Winterfell"},
+  address: {street_address:"1844 W 7th Ave", city: "Vancouver", province:"BC", country: "Canada", postal_code: "V6J 1S8"},
   phone_number: "778-778-7777",
   password: PASSWORD,
   verified: true,
@@ -27,16 +39,11 @@ admin = User.create(
 )
 
 NUM_OF_CUSTOMERS.times do 
+  address = VANCOUVER_ADDRESSES.sample
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
-    address: {
-      street_address: Faker::Address.street_address,
-      city: Faker::Address.city,
-      province: Faker::Address.state_abbr,
-      postal_code: Faker::Address.zip_code
-    },
     phone_number: Faker::PhoneNumber.cell_phone,
     password: PASSWORD,
     role: 2
@@ -46,15 +53,17 @@ end
 customers = User.order(created_at: :desc).limit(10).offset(0)
 
 NUM_OF_COOKS.times do 
+  address = VANCOUVER_ADDRESSES.sample
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
     address: {
-      street_address: Faker::Address.street_address,
-      city: Faker::Address.city,
-      province: Faker::Address.state_abbr,
-      postal_code: Faker::Address.zip_code
+      street_address: address[:street_address],
+      city: "Vancouver",
+      province: "BC",
+      postal_code: address[:postal_code],
+      country: "Canada"
     },
     phone_number: Faker::PhoneNumber.cell_phone,
     password: PASSWORD,

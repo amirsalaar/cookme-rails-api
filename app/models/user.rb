@@ -26,7 +26,9 @@ class User < ApplicationRecord
     end
     
     def join_address
-        address = self.address["street_address"] + ', ' + self.address["city"]  + ', ' +  self.address["province"]  + ' ' +  self.address["postal_code"]  + ', ' +  self.address["country"]
+        unless self.address.nil?
+            address = self.address["street_address"] + ', ' + self.address["city"]  + ', ' +  self.address["province"]  + ' ' +  self.address["postal_code"]  + ', ' +  self.address["country"]
+        end
     end
     
 end
