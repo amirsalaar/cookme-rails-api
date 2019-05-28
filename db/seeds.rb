@@ -79,8 +79,9 @@ NUM_OF_FOODS.times do
     name: Faker::Food.unique.dish,
     description: Faker::Food.description,
     price: rand(6..10) + rand,
-    cook: cooks.sample
-  )
+    cook: cooks.sample,
+    )
+  f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..7)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
   f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
 end
 
