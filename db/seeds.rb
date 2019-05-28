@@ -37,10 +37,12 @@ admin = User.create(
   verified: true,
   role: 1
 )
+admin.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
+
 
 NUM_OF_CUSTOMERS.times do 
   address = VANCOUVER_ADDRESSES.sample
-  User.create(
+  u = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
@@ -48,6 +50,7 @@ NUM_OF_CUSTOMERS.times do
     password: PASSWORD,
     role: 2
   )
+  u.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
 end
 
 customers = User.order(created_at: :desc).limit(10).offset(0)
