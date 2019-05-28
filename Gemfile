@@ -43,6 +43,7 @@ gem 'rack-cors'
 # gem 'ice_cube', '~> 0.16.3'
 gem 'stripe'
 gem 'geocoder'
+gem 'twilio-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

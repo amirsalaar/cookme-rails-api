@@ -1,3 +1,6 @@
 ENV['STRIPE_PUBLISHABLE_KEY'] = "Add Stripe publishable key here"
 ENV['STRIPE_SECRET_KEY'] = "Add Stripe secret key here"
 ENV['GOOGLE_GEOCODING'] = "Add your Google Map Geocoding API here"
+ENV['TWILIO_ACCOUNT_SID'] = 'Add your twilio ACCOUNT SID '
+ENV['TWILIO_AUTH_TOKEN'] = 'Add yout Twilio AUTH TOKEN'
+ENV['TWILIO_NUMBER'] = 'Add your Twilio number'

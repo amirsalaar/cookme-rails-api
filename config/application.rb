@@ -46,5 +46,8 @@ module CookMe
         )
       end
     end
+
+    config.autoload_paths += %W(#{config.root}/lib/tasks)
+
   end
 end
