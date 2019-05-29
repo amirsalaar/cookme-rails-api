@@ -10,7 +10,9 @@ class UserSerializer < ActiveModel::Serializer
     :verified,
     :created_at,
     :updated_at,
-    :avatar
+    :avatar,
+    :latitude,
+    :longitude
   )
 
   has_many :orders
