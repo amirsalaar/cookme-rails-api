@@ -1,4 +1,7 @@
 class Order < ApplicationRecord
+
+  TAX = 0.12
+
   belongs_to :user
   has_many :order_items, dependent: :nullify
   has_many :foods, through: :order_items
@@ -15,11 +18,16 @@ class Order < ApplicationRecord
 
   def place(order_details)
     (order_details.filter {|od| od.is_a? Hash }).each do |valid_od|
-      self.order_items.create(order_id: self.id, food_id: valid_od["food_id"], quantity: valid_od["order_quantity"]).save!
+      self.order_items.create(
+        order_id: self.id,
+        food_id: valid_od["foodId"], 
+        quantity: valid_od["quantity"]
+        ).save!
     end
   end
   
   def set_total!
-    self.total = foods.map(&:price).sum
+    # self.total = foods.map(&:price).sum
+    self.total = self.order_items.map(&:subtotal).sum * ( 1 + TAX )
   end
 end
