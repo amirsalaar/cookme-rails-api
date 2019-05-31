@@ -16,8 +16,8 @@ class Api::V1::OrdersController < Api::ApplicationController
 			order.save!
 			order.place(current_order)
 			order.reload.set_total!
-			order.save!        
-			render json: {status: 200, order: order}, status: 200
+			order.save!
+			render json: order, status: 200
     end
     
     private

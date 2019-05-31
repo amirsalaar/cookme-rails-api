@@ -15,14 +15,15 @@ class User < ApplicationRecord
     geocoded_by :join_address
     after_validation :geocode
 
+    
+    def full_name
+        first_name.strip.concat(' ', last_name.strip).titleize
+    end
+    
     private
     def titleize_name
         self.first_name = self.first_name&.titleize
         self.last_name = self.last_name&.titleize
-    end
-    
-    def full_name
-        self.first_name.strip.concat(' ', self.last_name.strip).titleize
     end
     
     def join_address
