@@ -1,4 +1,7 @@
 class Api::V1::PaymentsController < Api::ApplicationController
+
+  include Messenger
+
   def create
     order = Order.find params[:order_id]
     charge = Stripe::Charge.create(
@@ -8,6 +11,7 @@ class Api::V1::PaymentsController < Api::ApplicationController
       description: "Payment for order #{order.id} by #{current_user.full_name} collected."
     )
     order.update(transaction_id: charge.id)
+    send_message(order, charge)
     render json: { status: 200 }, status: 200
   end
 
@@ -16,4 +20,9 @@ class Api::V1::PaymentsController < Api::ApplicationController
     params.require(:stripeToken).permit!
   end
   
+  def send_message(order_instance, charge_response)
+    message = "Your order was placed. Order ID: #{order_instance.id}; Total: $#{charge_response.amount / 100.0} was placed!"
+    number = ENV['TEST_PHONE_NUMBER']
+    self.send_sms(number, message)
+  end
 end
