@@ -17,8 +17,8 @@ class Api::V1::SessionsController < Api::ApplicationController
     end
 
     def destroy_cart
-        session[:current_order] = nil
-        render json: { current_order }, status: 200
+        session[:current_order] = []
+        render json: current_order, status: 200
     end
     
     def destroy
