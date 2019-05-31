@@ -16,7 +16,10 @@ Rails.application.routes.draw do
         resource :cart, only: [:show]
       end
       resource :session, only: [:create, :destroy] do
-        post :add_to_cart
+        collection do
+          post :add_to_cart
+          delete :destroy_cart
+        end
       end
     end
   end

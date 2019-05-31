@@ -16,6 +16,11 @@ class Api::V1::SessionsController < Api::ApplicationController
         render json: current_order
     end
 
+    def destroy_cart
+        session[:current_order] = nil
+        render json: { current_order }, status: 200
+    end
+    
     def destroy
         session[:user_id] = nil
         session[:order_details] = nil
