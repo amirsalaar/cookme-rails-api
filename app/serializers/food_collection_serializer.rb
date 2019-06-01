@@ -6,8 +6,18 @@ class FoodCollectionSerializer < ActiveModel::Serializer
     :name,
     :description,
     :price,
-    :pictures
+    :cook,
+    :pictures,
     )
+
+    belongs_to :cook
+
+    class UserSerializer < ActiveModel::Serializer
+      attributes(
+        :latitude,
+        :longitude
+      )
+    end
 
     def pictures
       object.pictures_attachments.includes(:blob).map do |attachment|
