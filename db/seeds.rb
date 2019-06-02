@@ -9,11 +9,17 @@
 User.destroy_all
 Schedule.destroy_all
 Food.destroy_all
+Tagging.destroy_all
+Ingredient.destroy_all
+Order.destroy_all
+OrderItem.destroy_all
 
 PASSWORD = 'supersecret'
 NUM_OF_FOODS = 20
 NUM_OF_COOKS = 10
 NUM_OF_CUSTOMERS = 5
+NUM_OF_INGREDIENTS = 100
+
 VANCOUVER_ADDRESSES = [
   {street_address: "674 Granville St", postal_code: "V6C 1Z6"},
   {street_address: "300 Cambie St", postal_code: "V6B 2N3"},
@@ -93,6 +99,17 @@ end
 
 cooks = User.order(created_at: :desc).limit(5).offset(0)
 
+NUM_OF_INGREDIENTS.times do
+  Ingredient.create(name: 
+  [ Faker::Food.ingredient, 
+    Faker::Food.vegetables,
+    Faker::Food.fruits,
+    Faker::Food.spice].sample
+  )
+end
+
+ingredients = Ingredient.all
+
 NUM_OF_FOODS.times do 
   f = Food.create(
     name: Faker::Food.unique.dish,
@@ -102,9 +119,11 @@ NUM_OF_FOODS.times do
     )
   f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..10)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
   f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
+  f.ingredients = ingredients.shuffle.slice(0, rand(ingredients.count / 2))
 end
 
 puts "#{customers.count} customer created!"
 puts "#{cooks.count} cooks created!"
 puts "#{Food.all.count} foods created!"
 puts "#{Schedule.all.count} schedules created!" 
+puts "#{Ingredient.all.count} ingredients created!" 
