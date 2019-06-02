@@ -8,9 +8,10 @@ class User < ApplicationRecord
     has_one_attached :certificate
     
     validates :first_name, :last_name, presence: true
-    validates :email, presence: true, uniqueness: true, format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+    validates :email, presence: true, uniqueness: { case_sensitive: false }, format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     
     before_validation :titleize_name
+    before_validation :downcase_email!
 
     geocoded_by :join_address
     after_validation :geocode
@@ -30,6 +31,10 @@ class User < ApplicationRecord
         unless self.address.nil?
             address = self.address["street_address"] + ', ' + self.address["city"]  + ', ' +  self.address["province"]  + ' ' +  self.address["postal_code"]  + ', ' +  self.address["country"]
         end
+    end
+    
+    def downcase_email!
+        self.email&.downcase!
     end
     
 end
