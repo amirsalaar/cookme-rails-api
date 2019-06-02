@@ -24,7 +24,13 @@ VANCOUVER_ADDRESSES = [
   {street_address: "1518 Robson St", postal_code: "V6G 1C3"},
   {street_address: "556 Beatty St", postal_code: "V6B 2L3"},
   {street_address: "1283 Hamilton St", postal_code: "V6B 6K3"},
-  {street_address: "888 Nelson St", postal_code: "V6Z 2H1"}
+  {street_address: "888 Nelson St", postal_code: "V6Z 2H1"},
+  {street_address: "2210 Cornwall Ave", postal_code: "V6K 1B5"},
+  {street_address: "1690 Robson St", postal_code: "V6G 1C7"},
+  {street_address: "2141 Granville St", postal_code: "V6H 3E9"},
+  {street_address: "1619 W Broadway", postal_code: "V6J 1W9"},
+  {street_address: "85 W 1st Ave", postal_code: "V5Y 3K8"},
+  {street_address: "2996 Granville St", postal_code: "V6H 3J7"},
 ]
 
 admin = User.create(
