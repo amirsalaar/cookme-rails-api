@@ -91,7 +91,7 @@ NUM_OF_FOODS.times do
   f = Food.create(
     name: Faker::Food.unique.dish,
     description: Faker::Food.description,
-    price: rand(6..10) + rand,
+    price: rand(6..10) + 0.99,
     cook: cooks.sample,
     )
   f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..7)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
