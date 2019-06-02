@@ -116,10 +116,11 @@ NUM_OF_FOODS.times do
     description: Faker::Food.description,
     price: rand(6..10) + 0.99,
     cook: cooks.sample,
+    ratings: rand(1..5).to_i,
     )
   f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..10)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
   f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
-  f.ingredients = ingredients.shuffle.slice(0, rand(ingredients.count / 2))
+  f.ingredients = ingredients.shuffle.slice(0, rand(5..10))
 end
 
 puts "#{customers.count} customer created!"

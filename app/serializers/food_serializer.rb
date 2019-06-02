@@ -7,14 +7,20 @@ class FoodSerializer < ActiveModel::Serializer
     :description,
     :price,
     :pictures,
-    :ratings
+    :ratings,
+    :ingredients,
   )
 
   belongs_to :cook
   has_many :schedules
-
+  has_many :ingredients
+  
   class ScheduleSerializer < ActiveModel::Serializer
     attributes :id, :weekday, :quantity
+  end
+
+  class IngredientSerializer < ActiveModel::Serializer
+    attributes(:id, :name)
   end
   
   class UserSerializer < ActiveModel::Serializer

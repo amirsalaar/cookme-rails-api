@@ -7,6 +7,7 @@ class FoodCollectionSerializer < ActiveModel::Serializer
     :description,
     :price,
     :cook,
+    :ratings,
     :pictures,
     )
 
