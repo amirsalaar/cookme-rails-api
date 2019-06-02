@@ -4,6 +4,8 @@ class Food < ApplicationRecord
     has_many :orders, through: :order_items
     has_many :schedules, dependent: :destroy
     has_many_attached :pictures
+    has_many :taggings, dependent: :destroy
+    has_many :ingredients, through: :taggings
 
     validates :name, presence: true, uniqueness: { scope: [:user_id], case_sensitive: false, message: "must be unique for a cook" }, on: :create
     validates :description, presence: true
