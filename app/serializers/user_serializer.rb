@@ -13,7 +13,8 @@ class UserSerializer < ActiveModel::Serializer
     :updated_at,
     :avatar,
     :latitude,
-    :longitude
+    :longitude,
+    
   )
 
   has_many :orders

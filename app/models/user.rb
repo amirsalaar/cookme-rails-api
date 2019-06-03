@@ -20,6 +20,14 @@ class User < ApplicationRecord
     def full_name
         first_name.strip.concat(' ', last_name.strip).titleize
     end
+
+    def average_ratings
+        if self.verified? 
+            self.foods.where.not(ratings: nil).average(:ratings).to_f.round(1)
+        else
+            nil
+        end
+    end
     
     private
     def titleize_name

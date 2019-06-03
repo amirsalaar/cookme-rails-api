@@ -40,6 +40,7 @@ class FoodSerializer < ActiveModel::Serializer
       :latitude,
       :longitude,
       :foods,
+      :average_ratings,
     )
 
     def foods
