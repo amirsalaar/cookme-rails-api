@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Api::ApplicationController
     def create
-        user = User.find_by(email: params[:email].downcase!)
+        user = User.find_by(email: params[:email])
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
             session[:current_order] = []

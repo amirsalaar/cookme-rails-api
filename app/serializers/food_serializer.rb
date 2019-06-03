@@ -9,9 +9,10 @@ class FoodSerializer < ActiveModel::Serializer
     :pictures,
     :ratings,
     :ingredients,
+    :cook,
   )
 
-  belongs_to :cook
+  belongs_to :cook, class_name: "User", foreign_key:"user_id"
   has_many :schedules
   has_many :ingredients
   

@@ -79,7 +79,7 @@ customers = User.order(created_at: :desc).limit(10).offset(0)
 
 NUM_OF_COOKS.times do 
   address = VANCOUVER_ADDRESSES.sample
-  User.create(
+  u = User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
@@ -95,6 +95,7 @@ NUM_OF_COOKS.times do
     verified: true,
     role: 1
   )
+  u.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
 end
 
 cooks = User.order(created_at: :desc).limit(5).offset(0)
