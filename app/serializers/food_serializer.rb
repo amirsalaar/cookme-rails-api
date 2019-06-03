@@ -39,7 +39,19 @@ class FoodSerializer < ActiveModel::Serializer
       :avatar,
       :latitude,
       :longitude,
+      :foods,
     )
+
+    def foods
+      foods = object.foods
+      foods.map do |food|
+        {
+          id: food.id,
+          name: food.name,
+          price: food.price
+        }
+      end
+    end
     
     def avatar
       attachment = object.avatar_attachment
