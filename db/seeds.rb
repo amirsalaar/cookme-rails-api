@@ -16,6 +16,7 @@ OrderItem.destroy_all
 
 PASSWORD = 'supersecret'
 NUM_OF_FOODS = 20
+NUM_OF_FOODS_ON_SALE = 7
 NUM_OF_COOKS = 10
 NUM_OF_CUSTOMERS = 5
 NUM_OF_INGREDIENTS = 100
@@ -122,6 +123,13 @@ NUM_OF_FOODS.times do
   f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..10)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
   f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
   f.ingredients = ingredients.shuffle.slice(0, rand(5..10))
+end
+
+foods = Food.all
+
+NUM_OF_FOODS_ON_SALE.times do 
+  f = foods.sample
+  f.update( sale_price: f.price * ( 1 - rand(0.1..0.25) ) )
 end
 
 puts "#{customers.count} customer created!"

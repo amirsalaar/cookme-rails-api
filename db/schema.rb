@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_200336) do
+ActiveRecord::Schema.define(version: 2019_06_04_003800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_200336) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "ratings"
+    t.decimal "sale_price", precision: 5, scale: 2, default: "0.0"
     t.index ["name", "user_id"], name: "index_foods_on_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_foods_on_user_id"
   end

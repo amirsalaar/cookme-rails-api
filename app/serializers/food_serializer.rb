@@ -6,6 +6,7 @@ class FoodSerializer < ActiveModel::Serializer
     :name,
     :description,
     :price,
+    :sale_price,
     :pictures,
     :ratings,
     :ingredients,
