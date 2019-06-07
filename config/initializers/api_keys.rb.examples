@@ -4,3 +4,5 @@ ENV['GOOGLE_GEOCODING'] = "Add your Google Map Geocoding API here"
 ENV['TWILIO_ACCOUNT_SID'] = 'Add your twilio ACCOUNT SID '
 ENV['TWILIO_AUTH_TOKEN'] = 'Add yout Twilio AUTH TOKEN'
 ENV['TWILIO_NUMBER'] = 'Add your Twilio number'
+ENV['AMAZON_S3_ACCESS_ID'] = 'Add your Amazon S3 Access ID'
+ENV['AMAZON_S3_SECRET_ACCESS_KEY'] = 'Add your Amazon S3 Secret Access Key'
