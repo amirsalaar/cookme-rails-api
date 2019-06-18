@@ -20,6 +20,7 @@ NUM_OF_FOODS_ON_SALE = 7
 NUM_OF_COOKS = 10
 NUM_OF_CUSTOMERS = 5
 NUM_OF_INGREDIENTS = 100
+SEED_IMAGES_DIR = 'seed_images'
 
 VANCOUVER_ADDRESSES = [
   {street_address: "674 Granville St", postal_code: "V6C 1Z6"},
@@ -50,7 +51,7 @@ admin = User.create(
   verified: true,
   role: 1
 )
-admin.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/js.png"), filename: "js.png")
+admin.avatar.attach(io: File.open("#{Rails.root.to_s}/#{SEED_IMAGES_DIR}/avatars/js.png"), filename: "js.png")
 
 customer = User.create(
   first_name: "Daenerys ",
@@ -61,7 +62,7 @@ customer = User.create(
   password: PASSWORD,
   role: 2
 )
-customer.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/dt.jpg"), filename: "dt.jpg")
+customer.avatar.attach(io: File.open("#{Rails.root.to_s}/#{SEED_IMAGES_DIR}/avatars/dt.jpg"), filename: "dt.jpg")
 
 NUM_OF_CUSTOMERS.times do 
   address = VANCOUVER_ADDRESSES.sample
@@ -73,7 +74,7 @@ NUM_OF_CUSTOMERS.times do
     password: PASSWORD,
     role: 2
   )
-  u.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
+  u.avatar.attach(io: File.open("#{Rails.root.to_s}/#{SEED_IMAGES_DIR}/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
 end
 
 customers = User.order(created_at: :desc).limit(10).offset(0)
@@ -96,7 +97,7 @@ NUM_OF_COOKS.times do
     verified: true,
     role: 1
   )
-  u.avatar.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
+  u.avatar.attach(io: File.open("#{Rails.root.to_s}/#{SEED_IMAGES_DIR}/avatars/#{rand(1..7)}.jpg"), filename: "avatar_#{rand(1..7)}")
 end
 
 cooks = User.order(created_at: :desc).limit(5).offset(0)
@@ -120,7 +121,7 @@ NUM_OF_FOODS.times do
     cook: cooks.sample,
     ratings: rand(1..5).to_i,
     )
-  f.pictures.attach(io: File.open("/home/amirsalar/Dropbox/Projects/CookMe/food images/#{rand(1..10)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
+  f.pictures.attach(io: File.open("#{Rails.root.to_s}/#{SEED_IMAGES_DIR}/food_images/#{rand(1..10)}.jpg"), filename: "food_#{rand(1..7)}.jpg")
   f.schedules.create(weekday: rand(0..6), quantity: rand(10..20))
   f.ingredients = ingredients.shuffle.slice(0, rand(5..10))
 end
