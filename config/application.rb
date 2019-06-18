@@ -37,7 +37,7 @@ module CookMe
     
     config.middleware.insert_before(0, Rack::Cors) do
       allow do
-        origins("localhost:3030")
+        origins("localhost:3030", "https://cookme-app.herokuapp.com", 'http://cookme-app.herokuapp.com')
         resource(
           "/api/*",
           headers: :any,
