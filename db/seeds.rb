@@ -46,7 +46,7 @@ admin = User.create(
   last_name: "Snow",
   email: "js@winterfell.gov",
   address: {street_address:"1844 W 7th Ave", city: "Vancouver", province:"BC", country: "Canada", postal_code: "V6J 1S8"},
-  phone_number: "778-778-7777",
+  phone_number: "+17788857036",
   password: PASSWORD,
   verified: true,
   role: 1
@@ -58,7 +58,7 @@ customer = User.create(
   last_name: "Targaryen",
   email: "dt@winterfell.gov",
   address: {street_address:"1844 W 7th Ave", city: "Vancouver", province:"BC", country: "Canada", postal_code: "V6J 1S8"},
-  phone_number: "778-778-7777",
+  phone_number: "+17788857036",
   password: PASSWORD,
   role: 2
 )

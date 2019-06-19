@@ -22,7 +22,7 @@ class Api::V1::PaymentsController < Api::ApplicationController
   
   def send_message(order_instance, charge_response)
     message = "Your order was placed. Order ID: #{order_instance.id}; Total: $#{charge_response.amount / 100.0} was placed!"
-    number = ENV['TEST_PHONE_NUMBER']
+    number = current_user.phone_number
     self.send_sms(number, message)
   end
 end
