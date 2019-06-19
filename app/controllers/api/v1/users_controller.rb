@@ -11,6 +11,7 @@ class Api::V1::UsersController < Api::ApplicationController
         user = User.new user_params
         user.save!
         session[:user_id] = user.id
+        session[:current_order] = []
         render json: {id: user.id}
     end
 

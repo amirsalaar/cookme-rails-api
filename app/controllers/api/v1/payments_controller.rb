@@ -21,7 +21,7 @@ class Api::V1::PaymentsController < Api::ApplicationController
   end
   
   def send_message(order_instance, charge_response)
-    message = "Your order was placed. Order ID: #{order_instance.id}; Total: $#{charge_response.amount / 100.0} was placed!"
+    message = "\nThank you #{current_user.first_name} for ordering with CookMe.\nYour order was placed. Order ID: #{order_instance.id}; Total: $#{charge_response.amount / 100.0} was placed!"
     number = current_user.phone_number
     self.send_sms(number, message)
   end
